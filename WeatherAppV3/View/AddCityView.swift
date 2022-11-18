@@ -2,18 +2,26 @@
 //  AddCityView.swift
 //  WeatherAppV3
 //
-//  Created by xindy.del.rosario on 9/17/22.
+//  
 //
 
 import SwiftUI
 
 struct AddCityView: View {
     //MARK: - PROPERTIES
+    func deleteCityName(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let city = WeatherListVM.city[index]
+            WeatherListVM.delete(city)
+        }
+        WeatherListVM.getAllCityName()
+    }
     
     @State var City = Constants.Strings.location
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var weatherVM = WeatherViewModel()
     @AppStorage("isDarkMode") private var isDarkMode = false
+    @StateObject private var WeatherListVM = WeatherListViewModel()
     
     //MARK: - BODY
     var body: some View {
@@ -39,10 +47,20 @@ struct AddCityView: View {
                         }.offset(x:0 , y:70)
                             .foregroundColor(Color("TextColor"))
                             .padding()
-                    }//:HSTACK
-                    Spacer ()
-                }
-            }
+                    }//HSTACK
+//                    SwiftUI.List{
+//                        ForEach (WeatherListVM.city, id: \.id) { city in
+//                            Text(city.CityName)
+//                        }
+//                        .onDelete(perform: deleteCityName)
+//                        .listRowBackground(Color.clear)
+//                    }
+//                    .listStyle(PlainListStyle())
+// 
+                    
+                    Spacer()
+                }//Vstack
+            }//zstack
             .preferredColorScheme(isDarkMode ? .dark : .light)
             .background(Image("Background")
                 .resizable()

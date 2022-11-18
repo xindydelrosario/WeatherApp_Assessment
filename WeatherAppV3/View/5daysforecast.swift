@@ -2,7 +2,7 @@
 //  5daysforecast.swift
 //  WeatherAppV3
 //
-//  Created by xindy.del.rosario on 9/17/22.
+//  
 //
 
 import SwiftUI

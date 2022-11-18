@@ -2,10 +2,11 @@
 //  CurrentView.swift
 //  WeatherAppV3
 //
-//  Created by xindy.del.rosario on 9/13/22.
+//  
 //
 
 import SwiftUI
+import Combine
 
 //MARK: - CHANGE SHEETS
 enum Sheets: Identifiable {
@@ -14,15 +15,20 @@ enum Sheets: Identifiable {
         return UUID()
     }
     
-    case AddCityView
+    case AddVityView
     case Settings
 }
 
 struct ContentView: View {
+    
     //MARK: - PROPERTIES
+    @StateObject var deviceLocationService = DeviceLocationService.shared
+    @State var tokens: Set<AnyCancellable> = []
     @AppStorage("isDarkMode") private var isDarkMode = false
     @EnvironmentObject var store: Store
     @State private var activeSheet: Sheets?
+    @State var coordinates: (lat: Double, lon: Double) = (0,0)
+    
     //MARK: - BODY
     var body: some View {
         NavigationView {
@@ -43,14 +49,19 @@ struct ContentView: View {
                     }//:VSTACK
                 }//:SCROLLVIEW
             }//:ZSTACK
-            //MARK: - DARKMODE AND LIGHTMODE
+            .onAppear {
+                observeCoordinateUpdates()
+                observeLocationAccessDenied()
+                deviceLocationService.requestLocationUpdates()
+            }
+            // DARKMODE AND LIGHTMODE
             .preferredColorScheme(isDarkMode ? .dark : .light)
             
             
-            //MARK: - CHANGE SHEETS
+            // CHANGE SHEETS
             .sheet(item: $activeSheet, content: { (item) in
                 switch item {
-                case .AddCityView:
+                case .AddVityView:
                     AddCityView().environmentObject(store)
                 case .Settings:
                     Settings().environmentObject(store)
@@ -70,6 +81,28 @@ struct ContentView: View {
             
         }//:NAVIGATTIONVIEW
         .navigationBarHidden(true)
+        
+    }
+    func observeCoordinateUpdates() {
+        deviceLocationService.coordinatesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    print (error)
+                }
+            }receiveValue: { coordinates in
+                self.coordinates = (coordinates.latitude, coordinates.longitude)
+            }
+            .store(in: &tokens)
+    }
+    
+    func observeLocationAccessDenied() {
+        deviceLocationService.deniedLocationAccessPublisher
+            .receive(on: DispatchQueue.main)
+            .sink {
+                print("alert")
+            }
+            .store(in: &tokens)
     }
 }
 //MARK: - PREVIEW
