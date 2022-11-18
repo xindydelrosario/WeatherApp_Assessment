@@ -25,6 +25,10 @@
 		7CC8D39728D7202E001B2025 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8D39628D7202E001B2025 /* Store.swift */; };
 		7CC8D39F28D7DAE2001B2025 /* UserDefaulExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8D39E28D7DAE2001B2025 /* UserDefaulExtension.swift */; };
 		7CC8D3A128D7DB48001B2025 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8D3A028D7DB48001B2025 /* DateExtension.swift */; };
+		7CDD6B2529274C6D00ABF514 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD6B2429274C6D00ABF514 /* CoreDataManager.swift */; };
+		7CDD6B2829274CAA00ABF514 /* WeatherCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD6B2629274CAA00ABF514 /* WeatherCoreDataModel.xcdatamodeld */; };
+		7CDD6B2A29274DAB00ABF514 /* WeatherListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD6B2929274DAB00ABF514 /* WeatherListViewModel.swift */; };
+		7CDD6B2C292752C600ABF514 /* DeviceLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD6B2B292752C600ABF514 /* DeviceLocationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +51,10 @@
 		7CC8D39628D7202E001B2025 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		7CC8D39E28D7DAE2001B2025 /* UserDefaulExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaulExtension.swift; sourceTree = "<group>"; };
 		7CC8D3A028D7DB48001B2025 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		7CDD6B2429274C6D00ABF514 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		7CDD6B2729274CAA00ABF514 /* WeatherCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		7CDD6B2929274DAB00ABF514 /* WeatherListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListViewModel.swift; sourceTree = "<group>"; };
+		7CDD6B2B292752C600ABF514 /* DeviceLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,7 @@
 		7C3FC8C028CED9AB000C930A /* WeatherAppV3 */ = {
 			isa = PBXGroup;
 			children = (
+				7CDD6B2329274C4600ABF514 /* Manager */,
 				7CC8D39528D72011001B2025 /* Global State */,
 				7C8828D228D03FCA00591C82 /* Extensions */,
 				7C8828C828D02E4500591C82 /* ViewModel */,
@@ -87,6 +96,7 @@
 				7C3FC8D228CEE273000C930A /* View */,
 				7C3FC8CF28CEDC26000C930A /* Service */,
 				7C3FC8C128CED9AB000C930A /* WeatherAppV3App.swift */,
+				7CDD6B2629274CAA00ABF514 /* WeatherCoreDataModel.xcdatamodeld */,
 				7C3FC8C528CED9AF000C930A /* Assets.xcassets */,
 				7C3FC8C728CED9AF000C930A /* Preview Content */,
 			);
@@ -105,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				7C8828CB28D0342900591C82 /* WebService.swift */,
+				7CDD6B2B292752C600ABF514 /* DeviceLocationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -143,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				7C8828CD28D0358500591C82 /* WeatherViewModel.swift */,
+				7CDD6B2929274DAB00ABF514 /* WeatherListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -163,6 +175,14 @@
 				7CC8D39628D7202E001B2025 /* Store.swift */,
 			);
 			path = "Global State";
+			sourceTree = "<group>";
+		};
+		7CDD6B2329274C4600ABF514 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				7CDD6B2429274C6D00ABF514 /* CoreDataManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,12 +255,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CDD6B2C292752C600ABF514 /* DeviceLocationService.swift in Sources */,
 				7C8828CC28D0342900591C82 /* WebService.swift in Sources */,
 				7CC8D3A128D7DB48001B2025 /* DateExtension.swift in Sources */,
 				7CC8D39F28D7DAE2001B2025 /* UserDefaulExtension.swift in Sources */,
 				7C53748028D2D34B00E0D257 /* CurrentWeather.swift in Sources */,
 				7C24678728D5A3B500CBEAF2 /* 5daysforecast.swift in Sources */,
+				7CDD6B2529274C6D00ABF514 /* CoreDataManager.swift in Sources */,
 				7C8828D128D03F8800591C82 /* Settings.swift in Sources */,
+				7CDD6B2829274CAA00ABF514 /* WeatherCoreDataModel.xcdatamodeld in Sources */,
+				7CDD6B2A29274DAB00ABF514 /* WeatherListViewModel.swift in Sources */,
 				7C24678328D5954500CBEAF2 /* AddCityView.swift in Sources */,
 				7C3FC8C428CED9AB000C930A /* ContentView.swift in Sources */,
 				7CBDBF0228E3DD4600C35B1B /* WeatherList.swift in Sources */,
@@ -381,7 +405,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherAppV3/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location Request";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Request for Location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Request for Current Location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -411,7 +436,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherAppV3/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location Request";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Request for Location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Request for Current Location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -453,6 +479,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7CDD6B2629274CAA00ABF514 /* WeatherCoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7CDD6B2729274CAA00ABF514 /* WeatherCoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 7CDD6B2729274CAA00ABF514 /* WeatherCoreDataModel.xcdatamodel */;
+			path = WeatherCoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7C3FC8B628CED9AB000C930A /* Project object */;
 }

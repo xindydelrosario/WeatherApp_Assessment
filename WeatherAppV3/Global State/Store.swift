@@ -2,7 +2,7 @@
 //  Store.swift
 //  WeatherAppV3
 //
-//  Created by xindy.del.rosario on 9/18/22.
+//  
 //
 
 import Foundation

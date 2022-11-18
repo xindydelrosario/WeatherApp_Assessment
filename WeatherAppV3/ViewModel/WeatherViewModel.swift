@@ -2,15 +2,20 @@
 //  WeatherViewModel.swift
 //  WeatherAppV3
 //
-//  Created by xindy.del.rosario on 9/13/22.
+//  
 //
 
 import Foundation
 import CoreLocation
 import SwiftUI
+import Combine
 
 class WeatherViewModel: ObservableObject {
     
+    @StateObject var deviceLocationService = DeviceLocationService.shared
+    @State var tokens: Set<AnyCancellable> = []
+    @State var coordinates: (lat: Double, lon: Double) = (0,0)
+    @EnvironmentObject var webService: DeviceLocationService
     @Published var weatherResponse = WeatherResponse.empty()
     @Published var city = Constants.Strings.location {
         didSet {
@@ -109,6 +114,8 @@ class WeatherViewModel: ObservableObject {
             var urlString = ""
             if let coor = coor {
                 urlString = Constants.URLs.weatherByCoor(lat: coor.latitude, lon: coor.longitude)
+                //urlString = Constants.init(currentLat: coordinates.lat, currentLon: coordinates.lon)
+                //location coordinate
             } else {
                 urlString = Constants.URLs.weatherByCoor(lat: 0, lon: 0)
             }

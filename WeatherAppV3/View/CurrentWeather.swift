@@ -2,7 +2,7 @@
 //  CurrentWeather.swift
 //  WeatherAppV3
 //
-//  Created by xindy.del.rosario on 9/15/22.
+//  
 //
 
 import SwiftUI
