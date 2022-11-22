@@ -65,6 +65,8 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate ,ObservableObje
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         coordinatesPublisher.send(completion: .failure(error))
     }
+    
+    //convert to city name
     func location(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastSeenLocation = locations.first
         fetchCountryAndCity(for: locations.first)
@@ -75,5 +77,7 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate ,ObservableObje
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             self.currentPlacemark = placemarks?.first
         }
+        
+        
     }
 }

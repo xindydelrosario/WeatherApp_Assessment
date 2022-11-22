@@ -29,6 +29,7 @@ struct ContentView: View {
     @State private var activeSheet: Sheets?
     @State var coordinates: (lat: Double, lon: Double) = (0,0)
     
+    
     //MARK: - BODY
     var body: some View {
         NavigationView {
@@ -39,15 +40,20 @@ struct ContentView: View {
                     .ignoresSafeArea(.all)
                 ScrollView{
                     VStack{
-                        
+
                         CurrentWeather()
                         
                         OtherInfo2()
                         
                         _daysforecast()
-                        
+                        Text ("\(coordinates.lon)")
+                            //.hidden()
+                        Text ("\(coordinates.lat)")
+                            //.hidden()
                     }//:VSTACK
+
                 }//:SCROLLVIEW
+
             }//:ZSTACK
             .onAppear {
                 observeCoordinateUpdates()

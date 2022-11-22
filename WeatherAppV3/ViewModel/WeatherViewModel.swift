@@ -113,11 +113,13 @@ class WeatherViewModel: ObservableObject {
         func getWeather(coor: CLLocationCoordinate2D?) {
             var urlString = ""
             if let coor = coor {
-                urlString = Constants.URLs.weatherByCoor(lat: coor.latitude, lon: coor.longitude)
+                //urlString = Constants.URLs.weatherByCoor(lat: coor.latitude, lon: coor.longitude)
                 //urlString = Constants.init(currentLat: coordinates.lat, currentLon: coordinates.lon)
                 //location coordinate
+                //urlString = Constants.WeatherByCoordinates()
+                urlString = Constants.Url.coordinatesByCurrentCoor(currentLon: coor.longitude, currentLat: coor.latitude)
             } else {
-                urlString = Constants.URLs.weatherByCoor(lat: 0, lon: 0)
+                urlString = Constants.Url.coordinatesByCurrentCoor(currentLon: 0, currentLat: 0)
             }
             getWeatherInternal(city: city, for: urlString)
         }
