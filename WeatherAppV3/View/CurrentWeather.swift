@@ -37,6 +37,7 @@ struct CurrentWeather: View {
                 Text("\(weatherVM.main)")
                     .font(.system(size: 35))
                 
+                
             }//:VSTACK
             
         }//:HSTACK

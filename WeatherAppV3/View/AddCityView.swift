@@ -68,7 +68,7 @@ struct AddCityView: View {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             .ignoresSafeArea(.all)
             .navigationBarItems(leading: Button(action: {}, label: {
-                            NavigationLink(destination: ContentView())
+                NavigationLink(destination: ContentView())
                             {
                                 Image(systemName: "chevron.left")
                                     .foregroundColor(Color("TextColor"))
