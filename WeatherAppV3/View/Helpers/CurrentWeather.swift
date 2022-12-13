@@ -22,7 +22,7 @@ struct CurrentWeather: View {
             VStack {
                 Text("\(weatherVM.dt)")
                 
-                Text("\(weatherVM.city)")
+                Text("\($weatherVM.city)")
                     .font(.system(size: 40))
                     .fontWeight(.bold)
                 HStack {
@@ -36,7 +36,6 @@ struct CurrentWeather: View {
                 }
                 Text("\(weatherVM.main)")
                     .font(.system(size: 35))
-                
                 
             }//:VSTACK
             

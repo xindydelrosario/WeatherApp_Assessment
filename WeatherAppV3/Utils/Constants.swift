@@ -8,71 +8,54 @@
 import Foundation
 import Combine
 import SwiftUI
-import CoreLocation
+import MapKit
 
 struct Constants {
-    
 
-    @State var tokens: Set<AnyCancellable> = []
     @State var coordinates: (lat: Double, lon: Double) = (0,0)
-    @StateObject var deviceLocationService = DeviceLocationService.shared
 
-    
-//    lazy var currentLocation = DeviceLocation.currentPlacemark?.administrativeArea
-//    init (currentLocation: String)  {
-//        self.currentLocation = currentLocation
-//    } // FOR CITY NAME
-    
+
     class URLs {
         static func weatherByCoor(lat: Double, lon: Double) -> String {
-            // return URL(string:
+           // return URL(string:
             return "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=953add67a12dc794e7a69cde0e4a01c6&units=metric"
         }
-    }// old API
-    
+    }
     class Strings {
-         static var location = ""
-        //lazy var location = "\(DeviceLocation.currentPlacemark?.administrativeArea)"
-         //static var location = "\(currentLocation)"
-        //location not working
+            static var location = "Antipolo"
+
+        }
+
     }
-    lazy var currentLat = coordinates.lat
-    lazy var currentLon = coordinates.lon
-    init (currentLat: Double, currentLon: Double) {
-        self.currentLat = currentLat
-        self.currentLon = currentLon
-    }
+
+private let apiKey = "<953add67a12dc794e7a69cde0e4a01c>"
+
+private var subscriptions = Set<AnyCancellable>()
     
-        class Url {
-        static func coordinatesByCurrentCoor (currentLon: Double, currentLat: Double)-> String {
-            return  "https://api.openweathermap.org/data/2.5/forecast?lat=\(currentLat)&lon=\(currentLon)&appid=953add67a12dc794e7a69cde0e4a01c6&units=metric"
-        
-        } // NO VALUE LAT AND LON
+func getAllWeatherInfo(for location: CLLocationCoordinate2D, onComplete: @escaping ((WeatherResponse?)->Void)) {
+    let lat = location.latitude
+    let lon = location.longitude
+    
+    guard let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(lat)&lon=\(lon)&exclude=minutely,alerts&units=metric&appid=\(apiKey)") else { return }
+    
+    URLSession.shared
+        .dataTaskPublisher(for: url)
+        .map(\.data)
+        .decode(type: WeatherResponse.self, decoder: JSONDecoder())
+        .sink { completion in
             
-    }
-    
-    func observeCoordinateUpdates() {
-        deviceLocationService.coordinatesPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                if case .failure(let error) = completion {
-                    print (error)
-                }
-            }receiveValue: { coordinates in
-                self.coordinates = (coordinates.latitude, coordinates.longitude)
+            if case .failure(let err) = completion {
+                print("Retrieving data from weather service received this error: \(err)")
+                onComplete(nil)
             }
-            .store(in: &tokens)
-    }
-    
-    func observeLocationAccessDenied() {
-        deviceLocationService.deniedLocationAccessPublisher
-            .receive(on: DispatchQueue.main)
-            .sink {
-                print("alert")
+            
+        } receiveValue: { object in
+            
+            DispatchQueue.main.async {
+                onComplete(object)
             }
-            .store(in: &tokens)
-    }
-    
+        }
+        .store(in: &subscriptions)
 }
 
 
