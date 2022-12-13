@@ -9,19 +9,13 @@ import SwiftUI
 
 struct AddCityView: View {
     //MARK: - PROPERTIES
-    func deleteCityName(at offsets: IndexSet) {
-        offsets.forEach { index in
-            let city = WeatherListVM.city[index]
-            WeatherListVM.delete(city)
-        }
-        WeatherListVM.getAllCityName()
-    }
+
     
     @State var City = Constants.Strings.location
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var weatherVM = WeatherViewModel()
     @AppStorage("isDarkMode") private var isDarkMode = false
-    @StateObject private var WeatherListVM = WeatherListViewModel()
+
     
     //MARK: - BODY
     var body: some View {
@@ -48,15 +42,6 @@ struct AddCityView: View {
                             .foregroundColor(Color("TextColor"))
                             .padding()
                     }//HSTACK
-//                    SwiftUI.List{
-//                        ForEach (WeatherListVM.city, id: \.id) { city in
-//                            Text(city.CityName)
-//                        }
-//                        .onDelete(perform: deleteCityName)
-//                        .listRowBackground(Color.clear)
-//                    }
-//                    .listStyle(PlainListStyle())
-// 
                     
                     Spacer()
                 }//Vstack
@@ -68,7 +53,7 @@ struct AddCityView: View {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             .ignoresSafeArea(.all)
             .navigationBarItems(leading: Button(action: {}, label: {
-                NavigationLink(destination: ContentView())
+                            NavigationLink(destination: ContentView())
                             {
                                 Image(systemName: "chevron.left")
                                     .foregroundColor(Color("TextColor"))

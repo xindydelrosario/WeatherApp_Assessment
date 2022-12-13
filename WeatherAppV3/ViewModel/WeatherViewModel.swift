@@ -12,16 +12,14 @@ import Combine
 
 class WeatherViewModel: ObservableObject {
     
-    @StateObject var deviceLocationService = DeviceLocationService.shared
-    @State var tokens: Set<AnyCancellable> = []
     @State var coordinates: (lat: Double, lon: Double) = (0,0)
-    @EnvironmentObject var webService: DeviceLocationService
     @Published var weatherResponse = WeatherResponse.empty()
+   // @Published var city = Constants.Strings.location {
     @Published var city = Constants.Strings.location {
         didSet {
             getLocation()
         }
-}
+    }
     
     
     let id = UUID()
@@ -113,13 +111,11 @@ class WeatherViewModel: ObservableObject {
         func getWeather(coor: CLLocationCoordinate2D?) {
             var urlString = ""
             if let coor = coor {
-                //urlString = Constants.URLs.weatherByCoor(lat: coor.latitude, lon: coor.longitude)
+                urlString = Constants.URLs.weatherByCoor(lat: coor.latitude, lon: coor.longitude)
                 //urlString = Constants.init(currentLat: coordinates.lat, currentLon: coordinates.lon)
                 //location coordinate
-                //urlString = Constants.WeatherByCoordinates()
-                urlString = Constants.Url.coordinatesByCurrentCoor(currentLon: coor.longitude, currentLat: coor.latitude)
             } else {
-                urlString = Constants.Url.coordinatesByCurrentCoor(currentLon: 0, currentLat: 0)
+                urlString = Constants.URLs.weatherByCoor(lat: 0, lon: 0)
             }
             getWeatherInternal(city: city, for: urlString)
         }
